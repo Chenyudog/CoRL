@@ -9,11 +9,12 @@ source env.sh
 
 | 路径 | 内容 |
 | --- | --- |
-| `openpi/` | 已有的官方 openpi 源码，提交 `215abfb`，含原版 LIBERO 子模块 |
+| `openpi/` | 移入本工作区的官方 openpi 源码，提交 `215abfb`，含原版 LIBERO 子模块 |
 | `pi05_libero/` | 已有的官方 LIBERO 微调权重，已转换为 PyTorch，附归一化统计 |
-| `libero_data/` | 已有 LIBERO 演示数据 |
 | `openpi/examples/libero/main.py` | 官方仿真示例，适合对照 observations 和动作的接口 |
 
-三个资源目录都是链接。修改链接指向的源码或文件会影响原目录，自己的实现写在 `code/`。这里的小型 `.venv` 复用现有依赖，原依赖的路径或版本变动会影响此环境。缓存使用硬链接复用 tokenizer 文件。
+`pi05_libero/` 链接到已有模型文件。原 openpi 路径保留了兼容链接。自己的实现写在 `code/`。
 
-创建目录和 Python 环境几乎不占额外磁盘空间。推理时仍需给模型分配内存和显存。在这台 8 GB 显卡上，之前已用 CPU 分担视觉编码跑通一条闭环，全 GPU 设置遇到过显存不足。
+工作区根目录的小型 `.venv` 复用随 openpi 一起移入的 `openpi/.venv`，其中包含 PyTorch、CUDA 用户态库、Transformers、JAX 等。仿真依赖放在或链接到 `.sim-deps/`，tokenizer 通过硬链接复用。工作区不包含 LIBERO 演示数据，原版仿真场景和初始状态仍随 openpi 保留。
+
+源码和依赖在同一文件系统内移动，未复制第二份。推理时仍需给模型分配内存和显存。在这台 8 GB 显卡上，之前已用 CPU 分担视觉编码跑通一条闭环，全 GPU 设置遇到过显存不足。
