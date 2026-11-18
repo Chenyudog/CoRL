@@ -1,0 +1,8 @@
+/LIBERO_pi05/.venv/
+/LIBERO_pi05/.cache/
+/LIBERO_pi05/.sim-deps/
+/LIBERO_pi05/.libero-config/
+/LIBERO_pi05/openpi
+/LIBERO_pi05/pi05_libero
+/LIBERO_pi05/libero_data
+__pycache__/
